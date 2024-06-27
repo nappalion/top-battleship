@@ -18,6 +18,7 @@ class Ship {
   }
 }
 
+// board holds pointers to ships; keep track of already fired coordinates
 class Gameboard {
   constructor() {
     // 10 x 10 board
@@ -85,7 +86,9 @@ class Gameboard {
 }
 
 class Player {
-  constructor() {}
+  constructor() {
+    this.gameboard = new Gameboard();
+  }
 }
 
-module.exports = { Ship, Gameboard };
+export { Ship, Gameboard, Player };

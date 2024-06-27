@@ -1,0 +1,20 @@
+:root {
+  --grid-width: 10px;
+  --grid-height: 10px;
+  --num-per-row: 10;
+}
+
+.element {
+  width: var(--grid-width);
+  height: var(--grid-height);
+  border-width: 1px;
+  border-style: solid;
+  border-color: black;
+}
+
+.container {
+  width: fit-content;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  margin: 10px;
+}
