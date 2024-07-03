@@ -43,6 +43,13 @@ class Gameboard {
     return true;
   }
 
+  isShip(x, y) {
+    if (this.board[x][y] instanceof Ship) {
+      return true;
+    }
+    return false;
+  }
+
   getCoordString(x, y) {
     return `${x},${y}`;
   }
@@ -55,7 +62,7 @@ class Gameboard {
       y >= this.board.length ||
       this.alreadyHit.has(this.getCoordString(x, y))
     ) {
-      return false;
+      return "invalid";
     }
 
     this.alreadyHit.add(this.getCoordString(x, y));
@@ -63,10 +70,10 @@ class Gameboard {
     if (this.board[x][y] instanceof Ship) {
       this.board[x][y].hit();
       this.updateShipSink(this.board[x][y]);
-      return true;
+      return "hit";
     }
 
-    return false;
+    return "miss";
   }
 
   updateShipSink(ship) {
@@ -86,8 +93,9 @@ class Gameboard {
 }
 
 class Player {
-  constructor() {
+  constructor(id) {
     this.gameboard = new Gameboard();
+    this.id = id;
   }
 }
 

@@ -51,11 +51,11 @@ describe("Gameboard", () => {
     const ship = new Ship(1, 0, false);
     testBoard.placeShip(0, 0, ship);
 
-    expect(testBoard.receiveAttack(1, 1)).toBe(false);
+    expect(testBoard.receiveAttack(1, 1)).toBe("miss");
     expect(testBoard.alreadyHit.has("1,1")).toBe(true);
 
-    expect(testBoard.receiveAttack(0, 0)).toBe(true);
-    expect(testBoard.receiveAttack(0, 0)).toBe(false);
+    expect(testBoard.receiveAttack(0, 0)).toBe("hit");
+    expect(testBoard.receiveAttack(0, 0)).toBe("invalid");
     expect(testBoard.alreadyHit.has("0,0")).toBe(true);
 
     expect(ship.numHits).toBe(1);
@@ -69,5 +69,13 @@ describe("Gameboard", () => {
     expect(testBoard.allShipsSunk()).toBe(false);
     testBoard.receiveAttack(0, 0);
     expect(testBoard.allShipsSunk()).toBe(true);
+  });
+
+  test("board can determine if there's a ship in a location", () => {
+    const testBoard = new Gameboard();
+    const ship = new Ship(1, 0, false);
+    expect(testBoard.isShip(0, 0)).toBe(false);
+    testBoard.placeShip(0, 0, ship);
+    expect(testBoard.isShip(0, 0)).toBe(true);
   });
 });
